@@ -1,38 +1,30 @@
 const express = require('express');
-const axios = require('axios');
-const dotenv = require('dotenv');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const bingV7route= require('./routes/bingV7')
+const creatPersonaRoute=require('./routes/createPersona')
+require('dotenv').config();
 
-dotenv.config();
+
+
 const app = express();
+const port = process.env.PORT || 5001;
+
+app.use(cors());
 app.use(express.json());
+app.use('/fetch-image',bingV7route)
+app.use('/create-persona',creatPersonaRoute)
 
-const apiKey = process.env.API_KEY
 
-app.post('/generate-video', async (req, res) => {
-  //const imageUrl= req.body.imageUrl
-  const { imageUrl, text } = req.body;
 
-  try {
-    const response = await axios.post('https://api.d-id.com/talks', {
-      source_url: imageUrl,
-      script: {
-        type: 'text',
-        input: "this is a test file 200",
-        voice_id: 'en_us_male',
-      },
-    }, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-    });
 
-    res.json(response.data);
 
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

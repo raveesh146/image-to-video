@@ -1,7 +1,8 @@
-
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://raveeshGulati:A94LbyWTEzOyZHPy@cluster0.mhvurda.mongodb.net/MDG')
-
+require('dotenv').config(); 
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log('MongoDB connected successfully'))
+.catch((err) => console.error('MongoDB connection error:', err));
 const UserPersonaSchema = new mongoose.Schema({
   name: String,
   traits: String,
