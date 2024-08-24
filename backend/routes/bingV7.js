@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/fetch-image', async (req, res) => {
+router.get('/', async (req, res) => {
   const { q } = req.query;
   const apiKey = process.env.BING_API_KEY;
   const searchUrl = "https://api.bing.microsoft.com/v7.0/images/search";

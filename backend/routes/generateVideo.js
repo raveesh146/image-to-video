@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 require('dotenv').config();
 
-router.post('/generate-video', async (req, res) => {
+router.post('/', async (req, res) => {
   const { imageUrl, text } = req.body;
   const apiKey = process.env.DID_API_KEY;
   const apiUrl = 'https://api.d-id.com/talks';
@@ -24,7 +24,7 @@ router.post('/generate-video', async (req, res) => {
         fluent: false,
         pad_audio: 0.0
       },
-      webhook: "https://yourdomain.com/webhook"  // Your webhook URL
+      webhook: "https://webhook-endpoint-f3re.onrender.com/webhook"  // Your webhook URL
     }, {
       headers: {
         'accept': 'application/json',
