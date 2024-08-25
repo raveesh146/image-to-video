@@ -14,7 +14,7 @@ const SearchBar = ({ onSearch }) => {
         type="text" 
         value={query} 
         onChange={(e) => setQuery(e.target.value)} 
-        placeholder="Enter actress name" 
+        placeholder="Enter Model Description" 
       />
       <button type="submit">Search</button>
     </form>

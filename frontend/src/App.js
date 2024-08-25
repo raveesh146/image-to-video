@@ -5,7 +5,7 @@ import ImageFetcher from './components/ImageFetcher';
 function App() {
   return (
     <div className="App">
-      <h1>AI Video Generator</h1>
+      <h1>AI Commercial Generator</h1>
       <ImageFetcher />
     </div>
   );

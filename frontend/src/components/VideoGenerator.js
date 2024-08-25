@@ -25,15 +25,28 @@ const VideoGenerator = ({ imageUrl }) => {
       />
       <button onClick={generateVideo}>Generate Video</button>
 
-{videoUrl && (
-  <div>
-    <h3>Your Video:</h3>
-    <video src={videoUrl} controls autoPlay />
-  </div>
-)}
-</div>
-);
+      {videoUrl && (
+        <div className="video-display">
+          <h3>Your Video:</h3>
+          <video src={videoUrl} controls  />
+          <br />
+          <button 
+            className="download-button" 
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = videoUrl;
+              link.download = 'generated-video.mp4';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
+          >
+            Download Video
+          </button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default VideoGenerator;
-
